@@ -38,7 +38,7 @@ public class MovieDatabaseSummarizer {
         ////////////////////////////////////////////////////////////////////////////////
         //The 5 most hired actors (top to bottom)
         Map<String, Long> appearances1 = actors.stream()
-                .map(actor -> actor.getMostHiredActors())
+                .map(actor -> actor.getActorsNames())
                 .flatMap(hierd -> hierd.stream())
                 .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
@@ -77,8 +77,8 @@ public class MovieDatabaseSummarizer {
         summary.setTopRatedMovies(topRatedMovie);
         summary.setTopGenresMovies(topGenresMovies);
         summary.setTopHiredActors(mostHiredActor);
-        summary.setNumberActorsFemaleRatio(percentFemale);
-        summary.setNumberActorsMaleRatio(percentMale);
+        summary.setActorsFemaleRatio(percentFemale);
+        summary.setActorsMaleRatio(percentMale);
 
         return summary;
     }

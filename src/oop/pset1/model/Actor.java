@@ -3,33 +3,31 @@ import java.util.List;
 
 public class Actor {
 
-        private List<String> mostHiredActors;
-        private List<String> ActorsMaleFemaleRatio ;
+        private List<String> Actorsnames;
+        private List<String> ActorGender;
 
         @Override
         public String toString() {
             return "Actor{" +
-                    "mostHiredActors=" + mostHiredActors +
-                    ", ActorsMaleFemaleRatio=" + ActorsMaleFemaleRatio +
+                    "mostHiredActors=" + Actorsnames +
+                    ", ActorsMaleFemaleRatio=" + ActorGender +
                     '}';
         }
 
         public void setMostHiredActors(List<String> mostHiredActors) {
-            this.mostHiredActors = mostHiredActors;
+            this.Actorsnames = mostHiredActors;
         }
 
         public void setActorsMaleFemaleRatio(List<String> actorsMaleFemaleRatio) {
-            ActorsMaleFemaleRatio = actorsMaleFemaleRatio;
+            ActorGender = actorsMaleFemaleRatio;
         }
 
-        public List<String> getMostHiredActors() {
+        public List<String> getActorsNames() {
 
-            return mostHiredActors;
+            return Actorsnames;
         }
 
         public List<String> getActorsMaleFemaleRatio() {
-            return ActorsMaleFemaleRatio;
+            return ActorGender;
         }
 }
-
-

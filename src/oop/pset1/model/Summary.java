@@ -10,9 +10,9 @@ public class Summary {
 
     private List<String> topHiredActors;
 
-    private List<String> numberActorsFemaleRatio;
+    private List<String> FemaleActorsRatio;
 
-    private List<String> numberActorsMaleRatio;
+    private List<String> MaleActorsRatio;
 
 
     public void setTopRatedMovies(List<String> topRatedMovies) {
@@ -39,19 +39,19 @@ public class Summary {
         return topGenresMovies;
     }
 
-    public void setNumberActorsMaleRatio(List<String> numberActorsMaleRatio) {
-        this.numberActorsMaleRatio = numberActorsMaleRatio;
+    public void setActorsMaleRatio(List<String> numberActorsMaleRatio) {
+        this.MaleActorsRatio = numberActorsMaleRatio;
     }
 
-    public List<String> getNumberActorsMaleRatio() {
-        return numberActorsMaleRatio;
+    public List<String> getActorsMaleRatio() {
+        return MaleActorsRatio;
     }
 
-    public void setNumberActorsFemaleRatio(List<String> numberActorsFemaleRatio) {
-        this.numberActorsFemaleRatio = numberActorsFemaleRatio;
+    public void setActorsFemaleRatio(List<String> numberActorsFemaleRatio) {
+        this.FemaleActorsRatio = numberActorsFemaleRatio;
     }
 
-    public List<String> getNumberActorsFemaleRatio() {
-        return numberActorsFemaleRatio;
+    public List<String> getActorsFemaleRatio() {
+        return FemaleActorsRatio;
     }
 }
