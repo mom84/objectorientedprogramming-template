@@ -2,17 +2,23 @@ package oop.pset1.controller;
 import oop.pset1.model.Actor;
 import oop.pset1.model.Movie;
 import oop.pset1.model.Summary;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.counting;
 
 public class MovieDatabaseSummarizer {
 
-    public Summary summarize(List<Movie> movies,List<Actor> actors) {
+    public Summary summarize(List<Movie> movies , List<Actor> actors) {
 
         // The 5 most rated films (top to bottom)
         List<String> topRatedMovie = movies.stream()
-
                 .sorted((e1, e2) -> e2.getRating().compareTo(e1.getRating()))
                 .limit(5)
                 .map(e -> e.getName() + " (" + e.getRating() + ")")
@@ -26,7 +32,7 @@ public class MovieDatabaseSummarizer {
                 .filter(e -> e.getGenre().size() != 0)
                 .map(movie -> movie.getGenre())
                 .flatMap(movieList -> movieList.stream())
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+                .collect(Collectors.groupingBy(e -> e, counting()));
 
         List<String> topGenresMovies = appearances.entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
@@ -37,46 +43,65 @@ public class MovieDatabaseSummarizer {
 
         ////////////////////////////////////////////////////////////////////////////////
         //The 5 most hired actors (top to bottom)
-        Map<String, Long> appearances1 = actors.stream()
-                .map(actor -> actor.getActorsNames())
-                .flatMap(hierd -> hierd.stream())
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        Map<String, Long> actorsAppearances = actors.stream()
+                .filter(e -> e.getActorsNames().size() != 0)
+                .map(movie -> movie.getActorsNames())
+                .flatMap(ActorList -> ActorList.stream())
+                .collect(Collectors.groupingBy(e -> e, counting()));
 
-
-        List<String> mostHiredActor = appearances1.entrySet().stream()
+        List<String> topHiredactors = actorsAppearances.entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                 .limit(5)
-                .map(e -> e.getKey() + " " +"("+ e.getValue()+")")
+                .map(e -> e.getKey() + " " + e.getValue() + " times")
                 .collect(Collectors.toList());
+
+
+
 
         ////////////////////////////////////////////////////////////////////////////////
         //The % of male-female ratio (biggest % smallest)
-        Map<Object, Long> percentOfFemale = actors.stream()
-                .map(actor -> actor.getActorsMaleFemaleRatio())
-                .flatMap(hierd -> hierd.stream())
+        Map<String, Long> percentOfFemale = actors.stream()
+                .map(actor -> actor.getActorGender())
+                .flatMap(genderMale -> genderMale.stream())
                 .filter(num ->num.contains("2"))
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-
-        List<String> percentFemale = percentOfFemale.entrySet().stream()
-                .map(e -> "Female" + " " +"("+ (Float.parseFloat(String.valueOf(e.getValue()))/150105)*100+")%")
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(e -> e, counting()));
 
 
-        Map<Object, Long> percentOfMale = actors.stream()
-                .map(actor -> actor.getActorsMaleFemaleRatio())
-                .flatMap(hierd -> hierd.stream())
+
+        Map<String, Long> percentOfMale = actors.stream()
+                .map(actor -> actor.getActorGender())
+                .flatMap(genderFemale -> genderFemale.stream())
                 .filter(num ->num.contains("1"))
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+                .collect(Collectors.groupingBy(e -> e, counting()));
+
+
+
+       Integer CountOfMale =  percentOfMale.entrySet().stream()
+                .mapToInt(e -> Math.toIntExact(e.getValue()))
+                .sum();
+
+       Integer CountOfFemale =  percentOfFemale.entrySet().stream()
+                .mapToInt(e -> Math.toIntExact(e.getValue()))
+                .sum();
+
+       Integer totalMaleAndFemale = CountOfMale + CountOfFemale;
+       System.out.println(totalMaleAndFemale);
 
         List<String> percentMale = percentOfMale.entrySet().stream()
-                .map(e -> "Male" + " " +"("+ (Float.parseFloat(String.valueOf(e.getValue()))/150105)*100+")%")
+                .map(e -> "Male" + " " +"("+ (Float.parseFloat(String.valueOf(e.getValue()))/totalMaleAndFemale*100)+")%")
                 .collect(Collectors.toList());
+
+        List<String> percentFemale = percentOfFemale.entrySet().stream()
+                .map(e -> "Female" + " " + "(" + (Float.parseFloat(String.valueOf(e.getValue()))/totalMaleAndFemale*100) + ")%")
+                .collect(Collectors.toList());
+
+
 
 
         Summary summary = new Summary();
         summary.setTopRatedMovies(topRatedMovie);
         summary.setTopGenresMovies(topGenresMovies);
-        summary.setTopHiredActors(mostHiredActor);
+        summary.setTopHiredActors(topHiredactors);
         summary.setActorsFemaleRatio(percentFemale);
         summary.setActorsMaleRatio(percentMale);
 

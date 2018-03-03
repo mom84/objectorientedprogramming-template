@@ -27,6 +27,8 @@ public class MovieParser {
         }
     }
 
+
+
     private Function<String[], Movie> toMovie() {
         return columns -> {
             Movie movie = new Movie();
@@ -39,7 +41,6 @@ public class MovieParser {
     }
 
     private static List<String> toGeneres(String column) {
-        //System.out.println(column);
         String objects = column.replaceAll("\\[", "").replaceAll("]", "");
         objects = objects.replaceAll("[0-9]", "");
         objects = objects.replaceAll("\\{", "").replaceAll("}", "");

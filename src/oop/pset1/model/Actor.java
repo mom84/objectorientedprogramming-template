@@ -14,12 +14,12 @@ public class Actor {
                     '}';
         }
 
-        public void setMostHiredActors(List<String> mostHiredActors) {
-            this.Actorsnames = mostHiredActors;
+        public void setActorsnames(List<String> Actorsnames) {
+            this.Actorsnames = Actorsnames;
         }
 
-        public void setActorsMaleFemaleRatio(List<String> actorsMaleFemaleRatio) {
-            ActorGender = actorsMaleFemaleRatio;
+        public void setActorGender(List<String> ActorGender) {
+            this.ActorGender = ActorGender;
         }
 
         public List<String> getActorsNames() {
@@ -27,7 +27,7 @@ public class Actor {
             return Actorsnames;
         }
 
-        public List<String> getActorsMaleFemaleRatio() {
+        public List<String> getActorGender() {
             return ActorGender;
         }
 }

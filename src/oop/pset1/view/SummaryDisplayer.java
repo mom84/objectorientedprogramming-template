@@ -29,6 +29,8 @@ public class SummaryDisplayer {
                .forEach(names -> System.out.println(names));
 
         System.out.println("-----------------");
+
+
        // The % of male-female ratio (biggest % smallest)
         System.out.println("The % of male-female ratio (biggest % smallest)");
 
