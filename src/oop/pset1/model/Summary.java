@@ -11,9 +11,9 @@ public class Summary {
 
     private List<String> topHiredActors;
 
-    private List<String> FemaleActorsRatio;
+    private Float FemaleActorsRatio;
 
-    private List<String> MaleActorsRatio;
+    private Float MaleActorsRatio;
 
 
     public void setTopRatedMovies(List<String> topRatedMovies) {
@@ -40,19 +40,19 @@ public class Summary {
         return topGenresMovies;
     }
 
-    public void setActorsMaleRatio(List<String> numberActorsMaleRatio) {
+    public void setActorsMaleRatio(Float numberActorsMaleRatio) {
         this.MaleActorsRatio = numberActorsMaleRatio;
     }
 
-    public List<String> getActorsMaleRatio() {
+    public Float getActorsMaleRatio() {
         return MaleActorsRatio;
     }
 
-    public void setActorsFemaleRatio(List<String> numberActorsFemaleRatio) {
+    public void setActorsFemaleRatio(Float numberActorsFemaleRatio) {
         this.FemaleActorsRatio = numberActorsFemaleRatio;
     }
 
-    public List<String> getActorsFemaleRatio() {
+    public Float getActorsFemaleRatio() {
         return FemaleActorsRatio;
     }
 }

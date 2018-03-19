@@ -34,11 +34,13 @@ public class SummaryDisplayer {
        // The % of male-female ratio (biggest % smallest)
         System.out.println("The % of male-female ratio (biggest % smallest)");
 
-        summary.getActorsMaleRatio()
-                .forEach(Male -> System.out.println(Male));
+        Float actorsMaleRatio = summary.getActorsMaleRatio();
+        System.out.println("Male" + " "+ actorsMaleRatio + " " + "%");
 
-        summary.getActorsFemaleRatio()
-                .forEach(Female -> System.out.println(Female));
+
+        Float actorsFemaleRatio = summary.getActorsFemaleRatio();
+        System.out.println("Female" + " "+actorsFemaleRatio + " " + "%");
+
 
     }
 }

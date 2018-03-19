@@ -27,8 +27,6 @@ public class MovieParser {
         }
     }
 
-
-
     private Function<String[], Movie> toMovie() {
         return columns -> {
             Movie movie = new Movie();
